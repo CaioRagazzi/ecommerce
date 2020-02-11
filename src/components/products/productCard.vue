@@ -1,10 +1,13 @@
 <template>
   <b-card>
     <div class="cardBody">
-      <h3>Bike</h3>
-      <b-img class="imagem" :src="this.imagem" fluid alt="Responsive image"></b-img>
-      <div>
-        <b-card-text>Bike Shimano.</b-card-text>
+      <!-- <h3>{{ description }}</h3> -->
+      <h4>Oi</h4>
+      <div class="imgContainer pb-2">
+        <b-img class="imagem" :src="imagem" fluid alt="Responsive image"></b-img>
+      </div>
+      <div class="btnContainer">
+        <!-- <b-card-text>{{altDescription}}</b-card-text> -->
         <b-button variant="primary">Add to cart</b-button>
       </div>
     </div>
@@ -14,7 +17,7 @@
 <script>
 export default {
   name: "ProductCard",
-  props: ["imagem"]
+  props: ["imagem", "description", "altDescription"]
 };
 </script>
 
@@ -23,6 +26,7 @@ export default {
   display: flex;
   height: 100%;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
 }
 </style>

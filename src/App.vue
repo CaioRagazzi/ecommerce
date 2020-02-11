@@ -1,25 +1,13 @@
 <template>
   <div id="app">
     <NavBar />
-    <div class="flex-grid p-5">
-      <ProductCard imagem="https://vader-prod.s3.amazonaws.com/1561385328-zero_slr_cv_e3.jpg" />
+    <div class="flex-grid p-3">
       <ProductCard
-        imagem="https://cdn11.bigcommerce.com/s-ox79uhj/images/stencil/1280x1280/products/40011/103499/pinarello_dyodo_BOB__95433.1540182200.jpg?c=2&imbypass=on"
-      />
-      <ProductCard
-        imagem="https://content.competitivecyclist.com/images/items/900/BIA/BIA0014/GLOCEL.jpg"
-      />
-      <ProductCard
-        imagem="https://static.evanscycles.com/production/bikes/road-bikes/product-image/484-319/bmc-roadmachine-02-three-2018-road-bike-white-orange-EV302709-9020-1.jpg"
-      />
-      <ProductCard
-        imagem="https://cdn.shopify.com/s/files/1/0232/3305/products/state_bicycle_co_4130_road_8_speed_Black_silver_white_1.jpg?v=1571266684"
-      />
-      <ProductCard
-        imagem="https://dks.scene7.com/is/image/dkscdn/16NISANSHKMRCP15XBAC_Red_is?wid=685&fmt=jpg"
-      />
-      <ProductCard
-        imagem="https://www.pushys.com.au/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/pushys/b/bianchi-intenso-potenza-road-bike-YNB8GI501D-PAR.jpg"
+        v-for="item in result"
+        :key="item.id"
+        :imagem="item.urls.thumb"
+        :description="item.alt_description"
+        :altDescription="item.description"
       />
     </div>
     <b-pagination
@@ -30,6 +18,7 @@
       :total-rows="rows"
       :per-page="perPage"
       aria-controls="my-table"
+      @change="changePage"
     ></b-pagination>
   </div>
 </template>
@@ -37,6 +26,7 @@
 <script>
 import NavBar from "./components/navBar/navBar";
 import ProductCard from "./components/products/productCard";
+import axios from "axios";
 
 export default {
   components: {
@@ -48,10 +38,31 @@ export default {
     return {
       currentPage: 1,
       rows: 20,
-      perPage: 10
+      perPage: 12,
+      clientId:
+        "d0fe30c193ede820f30eb9b49ecb6d662099d549564b9da5fdf0faa979037817",
+      query: "motorcycles",
+      result: []
     };
   },
-  mounted() {
+  created() {
+    this.getProducts()
+  },
+  methods: {
+    getProducts() {
+      axios
+        .get(
+          `https://api.unsplash.com/search/photos?client_id=${this.clientId}&per_page=${this.perPage}&page=${this.currentPage}&query=${this.query}`
+        )
+        .then(res => {
+          this.result = res.data.results;
+          this.rows = res.data.total_pages
+        });
+    },
+    changePage(page){
+      this.currentPage = page
+      this.getProducts()
+    }
   }
 };
 </script>
@@ -63,7 +74,6 @@ export default {
   grid-row-gap: 15px;
   justify-content: center;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-auto-rows: 1fr
 }
 
 @media screen and (min-width: 176px) and (max-width: 550px) {
