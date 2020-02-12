@@ -42,7 +42,7 @@ export default {
       perPage: 50,
       clientId:
         "d0fe30c193ede820f30eb9b49ecb6d662099d549564b9da5fdf0faa979037817",
-      query: "motorcycles",
+      query: "nature",
       result: []
     };
   },
