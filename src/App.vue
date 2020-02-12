@@ -1,16 +1,17 @@
 <template>
   <div id="app">
     <NavBar />
-    <div class="flex-grid p-3">
+    <div class="flex-grid pt-5">
       <ProductCard
         v-for="item in result"
         :key="item.id"
-        :imagem="item.urls.thumb"
+        :imagem="item.urls.regular"
         :description="item.alt_description"
         :altDescription="item.description"
       />
     </div>
     <b-pagination
+    class="pb-3"
       align="center"
       pills
       size="lg"
@@ -38,7 +39,7 @@ export default {
     return {
       currentPage: 1,
       rows: 20,
-      perPage: 12,
+      perPage: 20,
       clientId:
         "d0fe30c193ede820f30eb9b49ecb6d662099d549564b9da5fdf0faa979037817",
       query: "motorcycles",
@@ -46,7 +47,7 @@ export default {
     };
   },
   created() {
-    this.getProducts()
+    this.getProducts();
   },
   methods: {
     getProducts() {
@@ -56,12 +57,12 @@ export default {
         )
         .then(res => {
           this.result = res.data.results;
-          this.rows = res.data.total_pages
+          this.rows = res.data.total_pages;
         });
     },
-    changePage(page){
-      this.currentPage = page
-      this.getProducts()
+    changePage(page) {
+      this.currentPage = page;
+      this.getProducts();
     }
   }
 };
@@ -69,40 +70,8 @@ export default {
 
 <style>
 .flex-grid {
-  display: grid;
-  grid-column-gap: 10px;
-  grid-row-gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-@media screen and (min-width: 176px) and (max-width: 550px) {
-  .flex-grid {
-    display: grid;
-    grid-column-gap: 10px;
-    grid-row-gap: 15px;
-    justify-content: center;
-    grid-template-columns: 1fr;
-  }
-}
-
-@media screen and (min-width: 551px) and (max-width: 800px) {
-  .flex-grid {
-    display: grid;
-    grid-column-gap: 10px;
-    grid-row-gap: 15px;
-    justify-content: center;
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (min-width: 801px) and (max-width: 1000px) {
-  .flex-grid {
-    display: grid;
-    grid-column-gap: 10px;
-    grid-row-gap: 15px;
-    justify-content: center;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
 }
 </style>
