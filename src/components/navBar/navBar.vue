@@ -23,7 +23,7 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
   },
   destroyed() {
-    window.removeEventListener("scroll");
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     handleScroll() {
