@@ -21,7 +21,9 @@ export default {
     return {
       modal: false,
       product: {
-        id: undefined
+        urls:{
+          full: ""
+        }
       },
       clientId:
         "d0fe30c193ede820f30eb9b49ecb6d662099d549564b9da5fdf0faa979037817",
@@ -46,8 +48,7 @@ export default {
         });
     },
     clickProduct(product) {
-      console.log(product);
-
+      console.log(product.urls.full);
       this.product = product;
       this.modal = true;
     }
