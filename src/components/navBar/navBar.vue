@@ -1,12 +1,9 @@
 <template>
-  <b-navbar
-    sticky
-    toggleable="lg"
-    type="dark"
-    variant="info"
-  >
+  <b-navbar sticky toggleable="lg" type="dark" variant="info">
     <b-navbar-brand>
-      <h3 :class="isTop ? 'bigget-font' : 'small-font'"> {{ isTop ? logoTextBig : logoTextSmall }} </h3>
+      <h3 :class="isTop ? 'bigget-font' : 'small-font'">
+        <span>{{ logoTextBig }}<transition name="fade"><span v-if="isTop">{{ logoTextSmall }}</span></transition></span>
+      </h3>
     </b-navbar-brand>
   </b-navbar>
 </template>
@@ -17,8 +14,8 @@ export default {
   data: () => {
     return {
       isTop: true,
-      logoTextBig: "Ecommerce",
-      logoTextSmall: "Ecomm"
+      logoTextBig: "Ecomm",
+      logoTextSmall: "erce"
     };
   },
   created() {
@@ -34,7 +31,7 @@ export default {
       } else {
         this.isTop = true;
       }
-    },
+    }
   }
 };
 </script>
@@ -46,6 +43,12 @@ export default {
 }
 .bigget-font {
   font-size: 30px;
-  transition: 0.5s;
+  transition: 0.2s;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
