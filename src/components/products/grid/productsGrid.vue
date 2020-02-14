@@ -1,12 +1,10 @@
 <template>
   <div class="flex-grid pt-5">
-    <ProductCard
-      v-for="item in result"
-      :key="item.id"
-      :imagem="item.urls.regular"
-      :description="item.alt_description"
-      :altDescription="item.description"
-    />
+    <ProductCard v-for="item in result" :key="item.id" :product="item" @clickCart="clickProduct" />
+
+    <b-modal v-model="modal" id="modal-center" centered :title="product.name">
+      <b-img :src="product.urls.full" fluid></b-img>
+    </b-modal>
   </div>
 </template>
 
@@ -19,12 +17,18 @@ export default {
     ProductCard
   },
   name: "ProductsGrid",
-  props: ["perPage", "currentPage", "query"],
   data: () => {
     return {
+      modal: false,
+      product: {
+        id: undefined
+      },
       clientId:
         "d0fe30c193ede820f30eb9b49ecb6d662099d549564b9da5fdf0faa979037817",
-      result: []
+      perPage: 20,
+      currentPage: 1,
+      result: [],
+      query: "nature"
     };
   },
   created() {
@@ -40,6 +44,12 @@ export default {
           this.result = res.data.results;
           this.rows = res.data.total_pages;
         });
+    },
+    clickProduct(product) {
+      console.log(product);
+
+      this.product = product;
+      this.modal = true;
     }
   }
 };
