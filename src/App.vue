@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <NavBar />
-    <div class="flex-grid pt-5">
+    <ProductsGrid :perPage="perPage" :currentPage="currentPage" :query="query" />
+    <!-- <div class="flex-grid pt-5">
       <ProductCard
         v-for="item in result"
         :key="item.id"
@@ -9,7 +10,7 @@
         :description="item.alt_description"
         :altDescription="item.description"
       />
-    </div>
+    </div> -->
     <b-pagination
     class="pb-3"
       align="center"
@@ -26,13 +27,13 @@
 
 <script>
 import NavBar from "./components/navBar/navBar";
-import ProductCard from "./components/products/productCard";
+import ProductsGrid from "./components/products/grid/productsGrid";
 import axios from "axios";
 
 export default {
   components: {
     NavBar,
-    ProductCard
+    ProductsGrid
   },
   name: "App",
   data: () => {
