@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavBar />
     <ProductsGrid :perPage="perPage" :currentPage="currentPage" :query="query" />
     <b-pagination
     class="pb-3"
@@ -17,14 +16,12 @@
 </template>
 
 <script>
-import NavBar from "../components/navBar/navBar";
 import ProductsGrid from "../components/products/grid/productsGrid";
 import axios from "axios";
 
 export default {
   components: {
-    NavBar,
-    ProductsGrid
+    ProductsGrid,
   },
   name: "ProductsGridPage",
   data: () => {
