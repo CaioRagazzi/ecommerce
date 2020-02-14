@@ -1,6 +1,5 @@
 <template>
   <b-navbar
-    class="navBar"
     sticky
     toggleable="lg"
     type="dark"
