@@ -2,8 +2,29 @@
   <div class="flex-grid pt-5">
     <ProductCard v-for="item in result" :key="item.id" :product="item" @clickCart="clickProduct" />
 
-    <b-modal v-model="modal" id="modal-center" centered :title="product.name">
-      <b-img :src="product.urls.full" fluid></b-img>
+    <b-modal
+      v-model="modal"
+      centered
+      :title="product.name"
+      @ok="addProductToCart"
+      @hidden="modalClosed"
+      @show="loadTags"
+    >
+      <b-container>
+        <b-badge variant="primary" class="mr-1 mb-1" v-for="tag in tags" :key="tag"> {{ tag }} </b-badge>
+
+        <b-img class="mb-3" left :src="product.urls.full" fluid :alt="product.alt_description"></b-img>
+
+        <p>{{ product.description }}</p>
+
+        <b-input-group prepend="Quantity" class="mt-3 pt-3 w-50">
+          <b-form-input v-model="productQuantity" disabled></b-form-input>
+          <b-input-group-append>
+            <b-button @click="productQuantity += 1" variant="success">+</b-button>
+            <b-button @click="decreasesQuantity" variant="danger">-</b-button>
+          </b-input-group-append>
+        </b-input-group>
+      </b-container>
     </b-modal>
   </div>
 </template>
@@ -19,9 +40,11 @@ export default {
   name: "ProductsGrid",
   data: () => {
     return {
+      tags: [],
+      productQuantity: 1,
       modal: false,
       product: {
-        urls:{
+        urls: {
           full: ""
         }
       },
@@ -48,13 +71,38 @@ export default {
         });
     },
     clickProduct(product) {
-      console.log(product.urls.full);
       this.product = product;
       this.modal = true;
+    },
+    decreasesQuantity() {
+      if (this.productQuantity > 1) {
+        this.productQuantity -= 1;
+      } else {
+        return;
+      }
+    },
+    addProductToCart() {
+      this.$store.dispatch("addToCart", {
+        ...this.product,
+        quantity: this.productQuantity
+      });
+    },
+    modalClosed() {
+      this.productQuantity = 1;
+    },
+    loadTags() {
+      this.product.tags.map(item => {
+        this.tags.push(item.title);
+      });
     }
   }
 };
 </script>
 
 <style>
+img {
+  width: 100% !important;
+  height: 300px !important;
+  object-fit: cover;
+}
 </style>

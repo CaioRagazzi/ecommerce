@@ -2,19 +2,20 @@
   <b-navbar sticky fixed toggleable="lg" type="dark" variant="info">
     <b-navbar-brand>
       <h3 :class="isTop ? 'bigget-font' : 'small-font'">
-        <span>
-          {{ logoTextBig }}
-          <transition name="fade">
-            <span v-if="isTop">{{ logoTextSmall }}</span>
-          </transition>
-        </span>
+        <span>{{ logoTextBig }}<transition name="fade"><span v-if="isTop">{{ logoTextSmall }}</span></transition></span>
       </h3>
     </b-navbar-brand>
     <b-navbar-nav class="ml-auto">
-      <b-dropdown size="sm" variant="link" toggle-class="text-decoration-none" right>
+      <b-dropdown class="pr-3" size="sm" variant="link" toggle-class="text-decoration-none" right no-caret>
         <template v-slot:button-content>
-          <!-- &#x1f50d; -->
-          <eva-icon name="shopping-cart" animation="pulse" fill="#ffff"></eva-icon>
+          <eva-icon name="shopping-cart" animation="pulse" fill="#ffff" :height="iconsHeight"></eva-icon>
+        </template>
+        <b-dropdown-item><router-link to="cart">Go to cart</router-link></b-dropdown-item>
+      </b-dropdown>
+
+      <b-dropdown class="pr-3" size="sm" variant="link" toggle-class="text-decoration-none" right no-caret>
+        <template v-slot:button-content>
+          <eva-icon name="person-outline" animation="pulse" fill="#ffff" :height="iconsHeight"></eva-icon>
         </template>
         <b-dropdown-item href="#">Action</b-dropdown-item>
         <b-dropdown-item href="#">Another action</b-dropdown-item>
@@ -34,6 +35,7 @@ export default {
   name: "NavBar",
   data: () => {
     return {
+      iconsHeight: 25,
       isTop: Boolean,
       logoTextBig: "Ecomm",
       logoTextSmall: "erce"
@@ -49,8 +51,10 @@ export default {
     handleScroll() {
       if (window.scrollY != 0) {
         this.isTop = false;
+        this.iconsHeight = 20;
       } else {
         this.isTop = true;
+        this.iconsHeight = 25;
       }
     }
   }
