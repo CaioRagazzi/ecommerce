@@ -89,6 +89,7 @@ export default {
     },
     modalClosed() {
       this.productQuantity = 1;
+      this.tags = [];
     },
     loadTags() {
       this.product.tags.map(item => {
