@@ -1,19 +1,22 @@
 <template>
   <b-navbar sticky fixed toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand>
+    <b-navbar-brand class="cursor-set" @click="goToInitial">
       <h3 :class="isTop ? 'bigget-font' : 'small-font'">
         <span>{{ logoTextBig }}<transition name="fade"><span v-if="isTop">{{ logoTextSmall }}</span></transition></span>
       </h3>
     </b-navbar-brand>
     <b-navbar-nav class="ml-auto">
-      <b-dropdown class="pr-3" size="sm" variant="link" toggle-class="text-decoration-none" right no-caret>
-        <template v-slot:button-content>
-          <eva-icon name="shopping-cart" animation="pulse" fill="#ffff" :height="iconsHeight"></eva-icon>
-        </template>
-        <b-dropdown-item><router-link to="cart">Go to cart</router-link></b-dropdown-item>
-      </b-dropdown>
-
-      <b-dropdown class="pr-3" size="sm" variant="link" toggle-class="text-decoration-none" right no-caret>
+      <eva-icon v-if="$store.getters.hasItems" name="shopping-cart" animation="pulse" fill="#ffff" :height="iconsHeight" class="pr-4 cursor-set" @click="goToCart"></eva-icon>
+      <eva-icon v-else name="shopping-cart-outline" animation="pulse" fill="#ffff" :height="iconsHeight" class="pr-4 cursor-set" @click="goToCart"></eva-icon>
+      
+      <b-dropdown
+        class="pr-3"
+        size="sm"
+        variant="link"
+        toggle-class="text-decoration-none"
+        right
+        no-caret
+      >
         <template v-slot:button-content>
           <eva-icon name="person-outline" animation="pulse" fill="#ffff" :height="iconsHeight"></eva-icon>
         </template>
@@ -56,12 +59,28 @@ export default {
         this.isTop = true;
         this.iconsHeight = 25;
       }
+    },
+    goToCart(){
+      if (this.$router.currentRoute.path == '/cart') {
+        return
+      }
+      this.$router.push('cart')      
+    },
+    goToInitial(){
+      if (this.$router.currentRoute.path == '/') {
+        return
+      }
+      this.$router.push('/')      
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+li a {
+    text-decoration: none;
+}
+
 .small-font {
   font-size: 15px;
   transition: 0.3s;
@@ -78,6 +97,9 @@ export default {
   opacity: 0;
 }
 .navbar-nav .dropdown-menu {
-    position: absolute !important;
+  position: absolute !important;
+}
+.cursor-set{
+  cursor: pointer;
 }
 </style>

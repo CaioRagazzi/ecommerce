@@ -11,14 +11,14 @@
       @show="loadTags"
     >
       <b-container>
-        <b-badge variant="primary" class="mr-1 mb-1" v-for="tag in tags" :key="tag"> {{ tag }} </b-badge>
+        <b-badge variant="primary" class="mr-1 mb-1" v-for="tag in tags" :key="tag">{{ tag }}</b-badge>
 
         <b-img class="mb-3" left :src="product.urls.full" fluid :alt="product.alt_description"></b-img>
 
         <p>{{ product.description }}</p>
 
-        <b-input-group prepend="Quantity" class="mt-3 pt-3 w-50">
-          <b-form-input v-model="productQuantity" disabled></b-form-input>
+        <b-input-group prepend="Quantity">
+          <b-form-input class="text-center" v-model="productQuantity" disabled></b-form-input>
           <b-input-group-append>
             <b-button @click="productQuantity += 1" variant="success">+</b-button>
             <b-button @click="decreasesQuantity" variant="danger">-</b-button>
@@ -73,6 +73,7 @@ export default {
     clickProduct(product) {
       this.product = product;
       this.modal = true;
+      
     },
     decreasesQuantity() {
       if (this.productQuantity > 1) {
@@ -82,10 +83,27 @@ export default {
       }
     },
     addProductToCart() {
-      this.$store.dispatch("addToCart", {
-        ...this.product,
-        quantity: this.productQuantity
+      if (this.checkIfItemAlreadyExists()) {
+        this.$store.dispatch("updateItem", {
+          ...this.product,
+          quantity: this.productQuantity
+        });
+      } else {        
+        this.$store.dispatch("addToCart", {
+          ...this.product,
+          quantity: this.productQuantity,
+        })
+      }
+    },
+    checkIfItemAlreadyExists() {            
+      const filteredStore = this.$store.getters.items.filter(item => {
+        return this.product.id === item.id && this.product.price === item.price
       });
+      
+      if (filteredStore.length > 0) {   
+        return true
+      }
+      return false      
     },
     modalClosed() {
       this.productQuantity = 1;
