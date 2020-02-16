@@ -13,7 +13,7 @@
       <b-container>
         <b-badge variant="primary" class="mr-1 mb-1" v-for="tag in tags" :key="tag">{{ tag }}</b-badge>
 
-        <b-img class="mb-3" left :src="product.urls.full" fluid :alt="product.alt_description"></b-img>
+        <b-img class="mb-3" left :src="product.urls.small" fluid :alt="product.alt_description"></b-img>
 
         <p>{{ product.description }}</p>
 

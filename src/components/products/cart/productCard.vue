@@ -21,7 +21,7 @@
           >{{ tag.title }}</b-badge>
         </h6>
         <div class="d-flex flex-wrap">
-          <b-img class="mb-3" left fluid :src="item.urls.full" :alt="item.alt_description"></b-img>
+          <b-img class="mb-3" left fluid :src="item.urls.small" :alt="item.alt_description"></b-img>
           <div>
             <div class="d-flex">
               <h5 class="pl-3">Phrase:</h5>
@@ -53,6 +53,9 @@
 <script>
 export default {
   name: "ProductCard",
+  created(){
+    console.log(this.$store.getters.items);    
+  },
   methods: {
     deleteFromCart(item) {
       this.$store.dispatch("deleteItem", { ...item });
