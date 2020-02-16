@@ -5,25 +5,11 @@
         <span>{{ logoTextBig }}<transition name="fade"><span v-if="isTop">{{ logoTextSmall }}</span></transition></span>
       </h3>
     </b-navbar-brand>
-    <b-navbar-nav class="ml-auto">
+    <b-navbar-nav class="d-flex flex-row ml-auto">
       <eva-icon v-if="$store.getters.hasItems" name="shopping-cart" animation="pulse" fill="#ffff" :height="iconsHeight" class="pr-4 cursor-set" @click="goToCart"></eva-icon>
       <eva-icon v-else name="shopping-cart-outline" animation="pulse" fill="#ffff" :height="iconsHeight" class="pr-4 cursor-set" @click="goToCart"></eva-icon>
       
-      <b-dropdown
-        class="pr-3"
-        size="sm"
-        variant="link"
-        toggle-class="text-decoration-none"
-        right
-        no-caret
-      >
-        <template v-slot:button-content>
-          <eva-icon name="person-outline" animation="pulse" fill="#ffff" :height="iconsHeight"></eva-icon>
-        </template>
-        <b-dropdown-item href="#">Action</b-dropdown-item>
-        <b-dropdown-item href="#">Another action</b-dropdown-item>
-        <b-dropdown-item href="#">Something else here...</b-dropdown-item>
-      </b-dropdown>
+      <eva-icon name="person-outline" animation="pulse" fill="#ffff" :height="iconsHeight"></eva-icon>
     </b-navbar-nav>
   </b-navbar>
 </template>
