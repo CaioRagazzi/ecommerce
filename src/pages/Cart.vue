@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ProductCard from "../components/products/cart/productCard";
+import ProductCard from "../components/products/cart/card/productCard";
 import EmptyCard from "../components/products/cart/emptyCard";
 import TotalPrice from "../components/products/cart/totalPriceCart";
 
