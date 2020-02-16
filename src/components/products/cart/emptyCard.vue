@@ -1,14 +1,17 @@
 <template>
-  <b-card class="cardProduct mb-4">
-    <span>Your cart is empty!</span>
+  <b-card class="cardProduct w100 text-center">
+      <span>Your cart is empty!</span>
   </b-card>
 </template>
 
 <script>
 export default {
-    name: "EmptyCard"
+  name: "EmptyCard"
 };
 </script>
 
-<style>
+<style scoped>
+.cardProduct {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 </style>
