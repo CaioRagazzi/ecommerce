@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import ProductCard from "../card/productCard";
+import ProductCard from "./productCard";
 import axios from "axios";
 
 export default {

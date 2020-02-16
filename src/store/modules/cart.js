@@ -19,9 +19,20 @@ const mutations = {
     updateItem(state, { product }){
         state.items.map(item => {
             if (item.id == product.id) {
-                item.quantity += product.qtd
+                item.quantity += product.quantity
             }
         })
+    },
+    deleteItem(state, { product }){
+        const itemToDelete = state.items.filter(item => {
+            if (item.id === product.id) {
+                return parseFloat(item.price) !== parseFloat(product.price)
+            } else {
+                return item.id !== product.id
+            }
+        })
+        
+        state.items = itemToDelete
     }
 }
 
@@ -31,6 +42,9 @@ const actions = {
     },
     updateItem({ commit }, product){
         commit('updateItem', { product })
+    },
+    deleteItem({ commit }, product){
+        commit('deleteItem', { product })
     }
 }
 
