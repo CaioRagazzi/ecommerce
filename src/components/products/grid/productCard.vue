@@ -1,7 +1,7 @@
 <template>
   <b-card
     border-variant="light"
-    :img-src="product.urls.regular"
+    :img-src="product.urls.small"
     style="max-width: 20rem;"
     class="m-3 cardProduct"
     :title="name"
