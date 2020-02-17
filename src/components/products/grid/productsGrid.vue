@@ -17,7 +17,7 @@
 
         <p>{{ product.description }}</p>
 
-        <b-input-group prepend="Quantity">
+        <b-input-group prepend="Quantity" class="w-75">
           <b-form-input class="text-center" v-model="productQuantity" disabled></b-form-input>
           <b-input-group-append>
             <b-button @click="productQuantity += 1" variant="success">+</b-button>

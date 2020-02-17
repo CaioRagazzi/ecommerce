@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-wrap">
     <b-img class="mb-3" left fluid :src="item.urls.small" :alt="item.alt_description"></b-img>
-    <div>
+    <div class="my-body-card">
       <div class="d-flex">
         <h5 class="pl-3">Phrase:</h5>
         <span class="pl-1">{{ item.phrase }}</span>
@@ -14,13 +14,15 @@
         <h5 class="pl-3">Quantity:</h5>
         <span class="pl-1">{{ item.quantity }}</span>
       </div>
-      <div class="d-flex">
+      <div class="d-flex flex-grow-1">
         <h5 class="pl-3">Price:</h5>
         <span class="pl-1">${{ item.price }}</span>
       </div>
-      <div class="d-flex">
-        <h5 class="pl-3">Total:</h5>
-        <span class="pl-1">${{ item.price * item.quantity }}</span>
+      <div class="pb-2">
+        <div class="d-flex">
+          <h5 class="pl-3">Total:</h5>
+          <span class="pl-1">${{ item.price * item.quantity }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -34,6 +36,11 @@ export default {
 </script>
 
 <style scoped>
+.my-body-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
 img {
   max-width: 20%;
   height: auto;

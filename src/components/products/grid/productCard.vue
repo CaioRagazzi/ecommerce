@@ -1,17 +1,17 @@
 <template>
-  <b-card
-    border-variant="light"
-    :img-src="product.urls.small"
-    style="max-width: 20rem;"
-    class="m-3 cardProduct"
-    :title="name"
-  >
-    <b-card-body>
-      <b-card-text>{{ phrase }}</b-card-text>
-      <b-card-text>$ {{ price }}</b-card-text>
-      <b-button @click="emitClick" variant="primary">Add to cart</b-button>
-    </b-card-body>
-  </b-card>
+  <div>
+    <b-card border-variant="light" style="max-width: 20rem;" class="m-3 cardProduct" :title="name">
+      <b-card-img @click="showImage" :src="product.urls.small" class="my-img" />
+      <b-card-body>
+        <b-card-text>{{ phrase }}</b-card-text>
+        <b-card-text>$ {{ price }}</b-card-text>
+        <b-button @click="emitClick" class="mt-3" variant="primary">Add to cart</b-button>
+      </b-card-body>
+    </b-card>
+    <b-modal hide-header scrollable hide-footer centered size="xl" ref="modal-image">
+      <b-img class="w-100 h-100" :src="product.urls.full"></b-img>
+    </b-modal>
+  </div>
 </template>
 
 <script>
@@ -24,7 +24,7 @@ export default {
     return {
       price: 0,
       name: "",
-      phrase: ""
+      phrase: "",
     };
   },
   created() {
@@ -33,6 +33,9 @@ export default {
     this.getWord(1);
   },
   methods: {
+    showImage() {
+      this.$refs["modal-image"].show();
+    },
     getPhrase(qtd) {
       const phrase = randomWords({ exactly: qtd, join: " " });
       this.phrase = this.turnFirstLetterUpperCase(phrase);
@@ -49,21 +52,23 @@ export default {
       this.price = priceRandom.toFixed(2);
     },
     emitClick() {
-      this.$emit("clickCart", { name: this.name, phrase: this.phrase, price: this.price, ...this.product });
+      this.$emit("clickCart", {
+        name: this.name,
+        phrase: this.phrase,
+        price: this.price,
+        ...this.product
+      });
     }
   }
 };
 </script>
 
 <style scoped>
-img {
+.my-img {
   width: 100% !important;
   height: 300px !important;
   object-fit: cover;
-}
-.div-flex {
-  display: flex;
-  justify-content: space-around;
+  cursor: pointer;
 }
 .cardProduct {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
