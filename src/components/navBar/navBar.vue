@@ -6,7 +6,7 @@
       </h3>
     </b-navbar-brand>
     <b-navbar-nav class="d-flex flex-row ml-auto">
-      <eva-icon v-if="$store.getters.hasItems" name="shopping-cart" animation="pulse" fill="#ffff" :height="iconsHeight" class="pr-4 cursor-set" @click="goToCart"></eva-icon>
+      <eva-icon v-if="hasItemsCart" name="shopping-cart" animation="pulse" fill="#ffff" :height="iconsHeight" class="pr-4 cursor-set" @click="goToCart"></eva-icon>
       <eva-icon v-else name="shopping-cart-outline" animation="pulse" fill="#ffff" :height="iconsHeight" class="pr-4 cursor-set" @click="goToCart"></eva-icon>
       
       <eva-icon name="person-outline" animation="pulse" fill="#ffff" :height="iconsHeight"></eva-icon>
@@ -16,6 +16,7 @@
 
 <script>
 import { EvaIcon } from "vue-eva-icons";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -35,6 +36,11 @@ export default {
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
+  },
+  computed: {
+    ...mapGetters({
+      hasItemsCart: "cart/hasItems"
+    })
   },
   methods: {
     handleScroll() {

@@ -21,7 +21,7 @@
       <div class="pb-2">
         <div class="d-flex">
           <h5 class="pl-3">Total:</h5>
-          <span class="pl-1">${{ item.price * item.quantity }}</span>
+          <span class="pl-1">${{ (item.price * item.quantity).toFixed(2) }}</span>
         </div>
       </div>
     </div>

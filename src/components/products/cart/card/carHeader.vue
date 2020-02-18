@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "CardHeader",
   props: ["item"],
@@ -33,8 +35,11 @@ export default {
       this.$refs["modalDelete"].show();
     },
     deleteFromCart() {
-      this.$store.dispatch("deleteItem", { ...this.item });
-    }
+      this.deleteItemCart({ ...this.item });
+    },
+    ...mapActions({
+      deleteItemCart: "cart/deleteItem"
+    })
   }
 };
 </script>

@@ -1,30 +1,30 @@
 const state = {
-    items: [],
+    cartItems: [],
 }
 
 const getters = {
     hasItems: state => {
-        return state.items.length > 0
+        return state.cartItems.length > 0
     },
     items: state => {
-        return state.items
+        return state.cartItems
     },
 }
 
 
 const mutations = {
     addToCart(state, { product }) {
-        state.items.push(product)
+        state.cartItems.push(product)
     },
     updateItem(state, { product }){
-        state.items.map(item => {
+        state.cartItems.map(item => {
             if (item.id == product.id) {
                 item.quantity += product.quantity
             }
         })
     },
     deleteItem(state, { product }){
-        const itemToDelete = state.items.filter(item => {
+        const itemToDelete = state.cartItems.filter(item => {
             if (item.id === product.id) {
                 return parseFloat(item.price) !== parseFloat(product.price)
             } else {
@@ -32,7 +32,7 @@ const mutations = {
             }
         })
         
-        state.items = itemToDelete
+        state.cartItems = itemToDelete
     }
 }
 
@@ -49,6 +49,7 @@ const actions = {
 }
 
 export default {
+    namespaced: true,
     state,
     getters,
     actions,

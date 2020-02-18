@@ -26,6 +26,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
+
 export default {
   name: "ModalProduct",
   props: ["product", "show"],
@@ -41,22 +44,24 @@ export default {
       this.showModal = val;
     }
   },
+  computed: {
+    ...mapGetters({
+      carItems: "cart/items"
+    })
+  },
   methods: {
     addProductToCart() {
       if (this.checkIfItemAlreadyExists()) {
-        this.$store.dispatch("updateItem", {
+        this.updateItemCart({
           ...this.product,
           quantity: this.productQuantity
         });
       } else {
-        this.$store.dispatch("addToCart", {
-          ...this.product,
-          quantity: this.productQuantity
-        });
+        this.addItemToCart({ ...this.product, quantity: this.productQuantity });
       }
     },
     checkIfItemAlreadyExists() {
-      const filteredStore = this.$store.getters.items.filter(item => {
+      const filteredStore = this.carItems.filter(item => {
         return this.product.id === item.id && this.product.price === item.price;
       });
 
@@ -81,7 +86,11 @@ export default {
       } else {
         return;
       }
-    }
+    },
+    ...mapActions({
+      addItemToCart: "cart/addToCart",
+      updateItemCart: "cart/updateItem"
+    })
   }
 };
 </script>
