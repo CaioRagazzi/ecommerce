@@ -39,7 +39,7 @@ export default {
 .my-body-card {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end ;
 }
 img {
   max-width: 20%;
