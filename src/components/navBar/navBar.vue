@@ -17,6 +17,7 @@
 <script>
 import { EvaIcon } from "vue-eva-icons";
 import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -56,6 +57,7 @@ export default {
       if (this.$router.currentRoute.path == '/cart') {
         return
       }
+      this.setGridScrollPosition(window.scrollY)
       this.$router.push('cart')      
     },
     goToInitial(){
@@ -63,7 +65,10 @@ export default {
         return
       }
       this.$router.push('/')      
-    }
+    },
+    ...mapActions({
+      setGridScrollPosition: 'scroll/setGridScrollPosition'
+    })
   }
 };
 </script>

@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="flex-grid pt-3 pb-5">
-      <ProductCard v-for="item in gridItems" :key="item.id" :product="item" @clickCart="clickProduct" />
+      <ProductCard
+        v-for="item in gridItems"
+        :key="item.id"
+        :product="item"
+        @clickCart="clickProduct"
+      />
       <ModalProduct :product="this.product" :show="modal" @modalClosed="modal = false" />
     </div>
     <div class="button-load-more mb-5">
@@ -16,8 +21,8 @@
 <script>
 import ProductCard from "./productCard";
 import ModalProduct from "./productModal";
-import { mapGetters } from 'vuex'
-import { mapActions } from 'vuex'
+import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -25,10 +30,11 @@ export default {
     ModalProduct
   },
   name: "ProductsGrid",
-  computed:{
+  computed: {
     ...mapGetters({
-      buttonLoading: 'grid/loading',
-      gridItems: 'grid/gridItems',
+      buttonLoading: "grid/loading",
+      gridItems: "grid/gridItems",
+      gridScrollPosition: "scroll/gridScrollPosition"
     })
   },
   data: () => {
@@ -38,11 +44,14 @@ export default {
         urls: {
           full: ""
         }
-      },
+      }
     };
   },
   created() {
-    this.addItemsToGrid();
+    if (this.gridItems == 0) this.addItemsToGrid();
+  },
+  mounted() {
+    window.scrollTo(0, this.gridScrollPosition);
   },
   methods: {
     getProducts() {
@@ -53,7 +62,7 @@ export default {
       this.modal = true;
     },
     ...mapActions({
-      addItemsToGrid: 'grid/addItemsToGrid'
+      addItemsToGrid: "grid/addItemsToGrid"
     })
   }
 };
