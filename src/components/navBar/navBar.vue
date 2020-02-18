@@ -9,7 +9,7 @@
       <eva-icon v-if="hasItemsCart" name="shopping-cart" animation="pulse" fill="#ffff" :height="iconsHeight" class="pr-4 cursor-set" @click="goToCart"></eva-icon>
       <eva-icon v-else name="shopping-cart-outline" animation="pulse" fill="#ffff" :height="iconsHeight" class="pr-4 cursor-set" @click="goToCart"></eva-icon>
       
-      <eva-icon name="person-outline" animation="pulse" fill="#ffff" :height="iconsHeight"></eva-icon>
+      <!-- <eva-icon name="person-outline" animation="pulse" fill="#ffff" :height="iconsHeight"></eva-icon> -->
     </b-navbar-nav>
   </b-navbar>
 </template>
