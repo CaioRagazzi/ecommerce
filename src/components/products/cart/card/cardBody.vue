@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-wrap">
-    <b-img class="mb-3" left fluid :src="item.urls.small" :alt="item.alt_description"></b-img>
+    <img class="mb-3" @click="showImageFull = true" :src="item.urls.small" :alt="item.alt_description" />
     <div class="my-body-card">
       <div class="d-flex">
         <h5 class="pl-3">Phrase:</h5>
@@ -25,12 +25,23 @@
         </div>
       </div>
     </div>
+    <ImageModal :image="item.urls.full" :show="showImageFull" @modalClosed="showImageFull = false" />
   </div>
 </template>
 
 <script>
+import ImageModal from "../../../image/imageModal";
+
 export default {
   name: "CardBody",
+  components: {
+    ImageModal
+  },
+  data: () => {
+    return {
+      showImageFull: false
+    }
+  },
   props: ["item"]
 };
 </script>
@@ -39,12 +50,13 @@ export default {
 .my-body-card {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end ;
+  justify-content: flex-end;
 }
 img {
   max-width: 20%;
   height: auto;
   object-fit: cover;
+  cursor: pointer;
 }
 span {
   font-weight: normal;

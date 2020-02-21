@@ -9,23 +9,26 @@
         <b-button @click="emitClick" class="mt-3" variant="primary">Add to cart</b-button>
       </div>
     </div>
-    <b-modal hide-header scrollable hide-footer centered size="xl" ref="modal-image">
-      <b-img class="w-100 h-100" :src="product.urls.full"></b-img>
-    </b-modal>
+    <ImageModal :image="product.urls.full" :show="showImageFull" @modalClosed="showImageFull = false" />
   </div>
 </template>
 
 <script>
 import randomWords from "random-words";
+import ImageModal from "../../image/imageModal";
 
 export default {
   name: "ProductCard",
+  components: {
+    ImageModal
+  },
   props: ["product"],
   data: () => {
     return {
       price: 0,
       name: "",
-      phrase: ""
+      phrase: "",
+      showImageFull: false
     };
   },
   created() {
@@ -35,7 +38,7 @@ export default {
   },
   methods: {
     showImage() {
-      this.$refs["modal-image"].show();
+      this.showImageFull = !this.showImageFull;
     },
     getPhrase(qtd) {
       const phrase = randomWords({ exactly: qtd, join: " " });

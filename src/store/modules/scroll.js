@@ -16,9 +16,7 @@ const mutations = {
 }
 
 const actions = {
-    setGridScrollPosition({ commit }, position) {
-        console.log(position);
-        
+    setGridScrollPosition({ commit }, position) {        
         commit('setGridScrollPosition', position)
     },
 }
