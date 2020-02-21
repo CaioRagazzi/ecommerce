@@ -50,7 +50,7 @@ export default {
       carItems: "cart/items"
     }),
     getPrice(){
-      return this.product.price * this.productQuantity
+      return (this.product.price * this.productQuantity).toFixed(2)
     },
   },
   methods: {
