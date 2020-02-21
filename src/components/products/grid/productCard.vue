@@ -1,13 +1,14 @@
 <template>
   <div>
-    <b-card border-variant="light" style="max-width: 20rem;" class="m-3 cardProduct" :title="name">
-      <b-card-img @click="showImage" :src="product.urls.small" class="my-img" />
-      <b-card-body>
-        <b-card-text>{{ phrase }}</b-card-text>
-        <b-card-text>$ {{ price }}</b-card-text>
+    <div class="m-3 my-card" :title="name">
+      <img @click="showImage" :src="product.urls.small" class="my-img" />
+      <div class="p-3">
+        <h5>{{ name }}</h5>
+        <p>{{ phrase }}</p>
+        <p>$ {{ price }}</p>
         <b-button @click="emitClick" class="mt-3" variant="primary">Add to cart</b-button>
-      </b-card-body>
-    </b-card>
+      </div>
+    </div>
     <b-modal hide-header scrollable hide-footer centered size="xl" ref="modal-image">
       <b-img class="w-100 h-100" :src="product.urls.full"></b-img>
     </b-modal>
@@ -24,7 +25,7 @@ export default {
     return {
       price: 0,
       name: "",
-      phrase: "",
+      phrase: ""
     };
   },
   created() {
@@ -70,7 +71,12 @@ export default {
   object-fit: cover;
   cursor: pointer;
 }
-.cardProduct {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.my-card {
+  max-width: 20rem;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+  transition: height 0.3s, box-shadow 0.3s;
+}
+.my-card:hover {
+  box-shadow: 20px 20px 40px 0px rgba(0, 0, 0, 0.5);
 }
 </style>
