@@ -1,5 +1,5 @@
 <template>
-  <b-navbar sticky fixed toggleable="lg" type="dark" variant="info">
+  <b-navbar sticky fixed toggleable="lg" type="dark" variant="info" class="my-nav">
     <b-navbar-brand class="cursor-set" @click="goToInitial">
       <h3 :class="isTop ? 'bigget-font' : 'small-font'">
         <span>{{ logoTextBig }}<transition name="fade"><span v-if="isTop">{{ logoTextSmall }}</span></transition></span>
@@ -74,6 +74,9 @@ export default {
 </script>
 
 <style scoped>
+.my-nav{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 li a {
     text-decoration: none;
 }

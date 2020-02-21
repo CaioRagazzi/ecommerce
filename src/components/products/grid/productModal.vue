@@ -13,6 +13,7 @@
       <b-img class="mb-3" left :src="product.urls.small" fluid :alt="product.alt_description"></b-img>
 
       <p>{{ product.description }}</p>
+      <p>$ {{ getPrice }}</p>
 
       <b-input-group prepend="Quantity" class="w-75">
         <b-form-input class="text-center" v-model="productQuantity" disabled></b-form-input>
@@ -47,7 +48,10 @@ export default {
   computed: {
     ...mapGetters({
       carItems: "cart/items"
-    })
+    }),
+    getPrice(){
+      return this.product.price * this.productQuantity
+    },
   },
   methods: {
     addProductToCart() {

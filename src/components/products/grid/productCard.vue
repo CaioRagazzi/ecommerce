@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="m-3 my-card" :title="name">
+    <div class="m-3 my-card">
       <img @click="showImage" :src="product.urls.small" class="my-img" />
       <div class="p-3">
         <h5>{{ name }}</h5>
