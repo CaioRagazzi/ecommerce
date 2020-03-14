@@ -13,7 +13,7 @@ export default {
   computed: {
     ...mapGetters({
       hasItemCart: "cart/hasItems",
-      cartItems: "cart/items",
+      cartItems: "cart/items"
     })
   },
   methods: {

@@ -12,7 +12,7 @@
 import ProductCard from "../components/products/cart/card/productCard";
 import EmptyCard from "../components/products/cart/emptyCard";
 import TotalPrice from "../components/products/cart/totalPriceCart";
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -22,12 +22,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      cartItems: "cart/items",
+      cartItems: "cart/items"
     })
   },
-  methods: {
-    
-  }
+  methods: {}
 };
 </script>
 

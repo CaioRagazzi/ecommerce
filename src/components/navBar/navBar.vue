@@ -2,13 +2,34 @@
   <b-navbar sticky fixed toggleable="lg" type="dark" variant="info" class="my-nav">
     <b-navbar-brand class="cursor-set" @click="goToInitial">
       <h3 :class="isTop ? 'bigget-font' : 'small-font'">
-        <span>{{ logoTextBig }}<transition name="fade"><span v-if="isTop">{{ logoTextSmall }}</span></transition></span>
+        <span>
+          {{ logoTextBig }}
+          <transition name="fade">
+            <span v-if="isTop">{{ logoTextSmall }}</span>
+          </transition>
+        </span>
       </h3>
     </b-navbar-brand>
     <b-navbar-nav class="d-flex flex-row ml-auto">
-      <eva-icon v-if="hasItemsCart" name="shopping-cart" animation="pulse" fill="#ffff" :height="iconsHeight" class="pr-4 cursor-set" @click="goToCart"></eva-icon>
-      <eva-icon v-else name="shopping-cart-outline" animation="pulse" fill="#ffff" :height="iconsHeight" class="pr-4 cursor-set" @click="goToCart"></eva-icon>
-      
+      <eva-icon
+        v-if="hasItemsCart"
+        name="shopping-cart"
+        animation="pulse"
+        fill="#ffff"
+        :height="iconsHeight"
+        class="pr-4 cursor-set"
+        @click="goToCart"
+      ></eva-icon>
+      <eva-icon
+        v-else
+        name="shopping-cart-outline"
+        animation="pulse"
+        fill="#ffff"
+        :height="iconsHeight"
+        class="pr-4 cursor-set"
+        @click="goToCart"
+      ></eva-icon>
+
       <!-- <eva-icon name="person-outline" animation="pulse" fill="#ffff" :height="iconsHeight"></eva-icon> -->
     </b-navbar-nav>
   </b-navbar>
@@ -53,32 +74,32 @@ export default {
         this.iconsHeight = 25;
       }
     },
-    goToCart(){
-      if (this.$router.currentRoute.path == '/cart') {
-        return
+    goToCart() {
+      if (this.$router.currentRoute.path == "/cart") {
+        return;
       }
-      this.setGridScrollPosition(window.scrollY)
-      this.$router.push('cart')      
+      this.setGridScrollPosition(window.scrollY);
+      this.$router.push("cart");
     },
-    goToInitial(){
-      if (this.$router.currentRoute.path == '/') {
-        return
+    goToInitial() {
+      if (this.$router.currentRoute.path == "/") {
+        return;
       }
-      this.$router.push('/')      
+      this.$router.push("/");
     },
     ...mapActions({
-      setGridScrollPosition: 'scroll/setGridScrollPosition'
+      setGridScrollPosition: "scroll/setGridScrollPosition"
     })
   }
 };
 </script>
 
 <style scoped>
-.my-nav{
+.my-nav {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 li a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .small-font {
@@ -99,7 +120,7 @@ li a {
 .navbar-nav .dropdown-menu {
   position: absolute !important;
 }
-.cursor-set{
+.cursor-set {
   cursor: pointer;
 }
 </style>

@@ -30,7 +30,7 @@ export default {
   methods: {
     emitClose() {
       this.$emit("modalClosed");
-    },
+    }
   }
 };
 </script>

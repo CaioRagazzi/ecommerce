@@ -1,6 +1,6 @@
 <template>
   <b-card class="cardProduct w100 text-center">
-      <span>Your cart is empty!</span>
+    <span>Your cart is empty!</span>
   </b-card>
 </template>
 
